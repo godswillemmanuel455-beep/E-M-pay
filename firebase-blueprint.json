@@ -1,0 +1,438 @@
+{
+  "entities": {
+    "WalletSummary": {
+      "title": "WalletSummary",
+      "description": "Primary banking wallet balances, rewards, and loan summary owned by an authenticated user.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "firstName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "tier": {
+          "type": "string",
+          "enum": ["Tier 1", "Tier 2", "Tier 3"]
+        },
+        "balance": {
+          "type": "number"
+        },
+        "earnedToday": {
+          "type": "number"
+        },
+        "businessSalesToday": {
+          "type": "number"
+        },
+        "cashbackBalance": {
+          "type": "number"
+        },
+        "checkedInToday": {
+          "type": "boolean"
+        },
+        "hideBalance": {
+          "type": "boolean"
+        },
+        "loanEligibleLimit": {
+          "type": "number"
+        },
+        "loanActiveBalance": {
+          "type": "number"
+        },
+        "loanDueDate": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "loanInterestRate": {
+          "type": "number"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "ownerId",
+        "firstName",
+        "tier",
+        "balance",
+        "earnedToday",
+        "businessSalesToday",
+        "cashbackBalance",
+        "checkedInToday",
+        "hideBalance",
+        "loanEligibleLimit",
+        "loanActiveBalance",
+        "loanDueDate",
+        "loanInterestRate",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "PrivateProfile": {
+      "title": "PrivateProfile",
+      "description": "Isolated PII and security settings for an authenticated user.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "fullName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "phone": {
+          "type": "string",
+          "maxLength": 30
+        },
+        "accountNumber": {
+          "type": "string",
+          "maxLength": 20,
+          "pattern": "^[0-9]{10}$"
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "hasPin": {
+          "type": "boolean"
+        },
+        "bvnVerified": {
+          "type": "boolean"
+        },
+        "ninVerified": {
+          "type": "boolean"
+        },
+        "biometricsEnabled": {
+          "type": "boolean"
+        },
+        "twoFactorEnabled": {
+          "type": "boolean"
+        },
+        "dailyTransferLimit": {
+          "type": "number"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "ownerId",
+        "fullName",
+        "phone",
+        "accountNumber",
+        "email",
+        "bvnVerified",
+        "ninVerified",
+        "biometricsEnabled",
+        "twoFactorEnabled",
+        "dailyTransferLimit",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Immutable banking ledger transaction record.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 140
+        },
+        "counterparty": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "bankName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "accountNumber": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "amount": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["credit", "debit"]
+        },
+        "category": {
+          "type": "string",
+          "enum": ["transfer", "deposit", "airtime", "data", "tv", "betting", "savings", "loan", "reward"]
+        },
+        "timestampLabel": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "reference": {
+          "type": "string",
+          "maxLength": 40,
+          "pattern": "^[A-Z0-9]+$"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Successful", "Pending", "Failed"]
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 140
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "ownerId",
+        "title",
+        "counterparty",
+        "bankName",
+        "accountNumber",
+        "amount",
+        "type",
+        "category",
+        "timestampLabel",
+        "reference",
+        "status",
+        "createdAt"
+      ]
+    },
+    "SavingsGoal": {
+      "title": "SavingsGoal",
+      "description": "OWealth, Fixed, or Target savings plan.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "savedAmount": {
+          "type": "number"
+        },
+        "targetAmount": {
+          "type": "number"
+        },
+        "interestRate": {
+          "type": "number"
+        },
+        "maturityDate": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "type": {
+          "type": "string",
+          "enum": ["OWealth", "Fixed", "Target"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "ownerId",
+        "title",
+        "savedAmount",
+        "targetAmount",
+        "interestRate",
+        "maturityDate",
+        "type",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "BankCard": {
+      "title": "BankCard",
+      "description": "Virtual or physical debit card attached to user account.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "scheme": {
+          "type": "string",
+          "enum": ["Verve", "Mastercard"]
+        },
+        "kind": {
+          "type": "string",
+          "enum": ["Virtual", "Physical"]
+        },
+        "maskedNumber": {
+          "type": "string",
+          "maxLength": 30
+        },
+        "fullNumber": {
+          "type": "string",
+          "maxLength": 30
+        },
+        "expiry": {
+          "type": "string",
+          "maxLength": 10
+        },
+        "cvv": {
+          "type": "string",
+          "maxLength": 4
+        },
+        "holderName": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "frozen": {
+          "type": "boolean"
+        },
+        "dailyLimit": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string",
+          "enum": ["NGN", "USD"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "ownerId",
+        "label",
+        "scheme",
+        "kind",
+        "maskedNumber",
+        "fullNumber",
+        "expiry",
+        "cvv",
+        "holderName",
+        "frozen",
+        "dailyLimit",
+        "currency",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "NotificationItem": {
+      "title": "NotificationItem",
+      "description": "Account activity and security notification item.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "body": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "timeLabel": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "read": {
+          "type": "boolean"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["transaction", "security", "reward"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "ownerId",
+        "title",
+        "body",
+        "timeLabel",
+        "read",
+        "category",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/WalletSummary" },
+      "description": "Primary wallet summary for an authenticated banking user."
+    },
+    "/users/{userId}/private/{docId}": {
+      "schema": { "$ref": "#/entities/PrivateProfile" },
+      "description": "Private PII and security profile document isolated from general user documents."
+    },
+    "/users/{userId}/transactions/{transactionId}": {
+      "schema": { "$ref": "#/entities/Transaction" },
+      "description": "Ledger transaction entries owned by the user."
+    },
+    "/users/{userId}/savingsGoals/{goalId}": {
+      "schema": { "$ref": "#/entities/SavingsGoal" },
+      "description": "User OWealth and target savings plans."
+    },
+    "/users/{userId}/cards/{cardId}": {
+      "schema": { "$ref": "#/entities/BankCard" },
+      "description": "User virtual and physical debit cards."
+    },
+    "/users/{userId}/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/NotificationItem" },
+      "description": "User account notifications and alerts."
+    }
+  }
+}
